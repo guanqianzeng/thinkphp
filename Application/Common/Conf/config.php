@@ -1,15 +1,16 @@
 <?php
+
 return array(
 	//'配置项'=>'配置值'
     'MODULE_ALLOW_LIST' => array('Home','Admin'),
 
     'DB_TYPE' => 'mysql',
-    'DB_HOST' => '127.0.0.1',
+    'DB_HOST' => '192.168.1.66',
     'DB_PORT' => 3306,
-    'DB_USER' => 'root',
-    'DB_PWD' => 'root',
+    'DB_USER' => 'jfsd',
+    'DB_PWD' => 'jfsd123456',
     'DB_PREFIX' => 'jfsd_',
-    'DB_NAME' => 'thinkphp',
+    'DB_NAME' => 'jfsd_thinkphp',
 
 
     'DATA_CACHE_COMPRESS' => true,
