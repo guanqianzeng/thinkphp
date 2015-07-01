@@ -1,10 +1,11 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;
-class IndexController extends Controller {
+use Admin\Common\AController;
+class IndexController extends AController {
+
     public function index(){
+        
 
-        $this->display("index");
-
+        $this->display();
     }
 }

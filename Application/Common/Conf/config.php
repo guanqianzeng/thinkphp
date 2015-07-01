@@ -19,7 +19,7 @@ return array(
     'DATA_CACHE_PATH' => '',
 
 
-    'DEFAULT_THEME' => 'Bjjfsd',
+    'DEFAULT_THEME' => 'default',
     'TMPL_TEMPLATE_SUFFIX' => '.php',
 
 

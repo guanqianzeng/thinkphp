@@ -1,8 +1,8 @@
 // JavaScript Document
 $(function(){
-		
+
 	var intT=300;//定义下面动画的时间
-	
+
 	//以下是控制右边宽度等于window-左边的
 	var Ww=$(window).width();//获取屏幕宽度
 	$('a').prepend()
@@ -12,7 +12,7 @@ $(function(){
 		}
 	$('.mright').width(Ww-206);//右边的宽度等于判断后的Ww-左边的宽度
 	$(window).resize(function(){//这一段是当放大缩小或者点击最大化最小化还原按钮时控制页面显示正常，重新计算宽度
-	
+
 		var Ww=$(window).width();
 		if(Ww<=1200)
 		{
@@ -20,13 +20,13 @@ $(function(){
 			}
 		$('.mright').width(Ww-206);
 		})
-	
-	
+
+
 	//以上是控制右边宽度等于window-左边
-	
+
 	//这一段是遍历.ul li，让每个子li获得各自的背景图
 	$('.ul>li').each(function(i){
-		$(this).css('background','url(images/xtb'+(i+1)+'.png) no-repeat 15px 12px #28323b');
+		$(this).css('background','url(Public/Admin/images/xtb'+(i+1)+'.png) no-repeat 15px 12px #28323b');
 		})
 	//这里是点击展开
 	$('.ul>li>a').click(function(){
@@ -34,7 +34,7 @@ $(function(){
 		$(this).parent('li').siblings('li').find('.ul1').slideUp();//这里控制其它菜单关闭
 		$(this).toggleClass('xz').parent().siblings('li').children('a').removeClass('xz');//这里控制的是箭头的变化
 		})
-		
+
 	//这里是蓝条的动画效果。
 	$('.ul1').each(function(){//遍历每个.ul1
 		var intJ=$(this).children('.xz').index();//声明一个变量
@@ -49,7 +49,7 @@ $(function(){
 				$(this).parent().find('.lt').stop().animate({'top':2+intJ*40},intT);
 			})
 		})
-	
+
 	$('.tab tr:odd td').css('background','#fff');
 		//下面这段是没用的代码，获取时间的。
 		/*	setInterval(function(){
@@ -81,7 +81,7 @@ $(function(){
 					d='日';
 					break;
 					}
-				var e=myDate.toLocaleTimeString(); 
+				var e=myDate.toLocaleTimeString();
 				var e1=e.substring(0,2)
 				var e2=parseInt(e.substring(2,4))
 				var e3=parseInt(e.substring(4,6))
@@ -95,7 +95,7 @@ $(function(){
 				$('.date').text(a+'年'+b+'月'+c+'日'+e2+':'+e3+':'+e4+'星期'+d);
 				},500)*/
 	$('.allcheck').click(function(){//这里实现的是全选和全部取消效果
-	
+
 		if($(this).attr('checked')==true){
 			$('.allcheck').attr('checked',true);
 			$('.table1 :checkbox').attr('checked',true);
@@ -113,7 +113,7 @@ $(function(){
 				$(this).parent(".fxlk").stop(true,true).hide();
 				$(this).parent(".fxlk").siblings(".wbjs").text($(this).text());
 				$(this).parent(".fxlk").siblings("input").val($(this).attr('title'));
-				
+
 				})
 	$(".wbjs").click(function(){
 				$(this).siblings(".fxlk").stop(true,true).show();
@@ -127,4 +127,4 @@ $(function(){
 		$(this).siblings().children('a').removeClass('xz');
 		$('.hdnr').eq(_index).show().siblings().hide();
 	})
-}) 
+})

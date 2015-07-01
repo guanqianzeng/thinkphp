@@ -1,13 +1,13 @@
 @charset "utf-8";
-* { padding: 0;margin: 0;} 
-address,caption,cite,code,dfn,em,th,var{font-weight:normal;font-style:normal;} 
-h1,h2,h3,h4,h5,h6{font-weight:normal;} 
+* { padding: 0;margin: 0;}
+address,caption,cite,code,dfn,em,th,var{font-weight:normal;font-style:normal;}
+h1,h2,h3,h4,h5,h6{font-weight:normal;}
 .clear{height: 0;line-height: 0;font-size: 0;clear: both;zoom: 1;overflow: hidden;visibility: hidden;width: 100%;display: block}
 body { margin:0 auto; padding:0;font-size:12px;font-family:"宋体";}
 img { border:0px;margin:0px;padding:0px}
 a{ text-decoration:none; font-size:12px;}
 a {blr:expression(this.onFocus=this.blur())}
-a:focus{outline:0;} 
+a:focus{outline:0;}
 .ul,.ul1,.ul>li,.ul1>li{ list-style:none;padding:0; margin:0;}/* CSS Document */
 .cr{cursor:pointer}
 
@@ -70,3 +70,37 @@ a:focus{outline:0;}
 
 .zxzx_main{border:solid 1px #d3d3d3;width:908px;padding:20px 0px;}
 .zc_bt{padding-left:25px;}
+
+/*分页*/
+.page:before,
+.page:after {
+    display: table;
+    content: "";
+}
+.page:after {
+    clear:both;
+}
+.page a,
+.page span {
+    float: left;
+    margin: 2px;
+    padding: 0 10px;
+    height: 30px;
+    line-height: 30px;
+}
+.page a:hover
+ {
+    text-decoration: none;
+    background-color: #FFF;
+    color:#000;
+}
+.page .current {
+    background-color: #FFF;
+    color:#000;
+}
+.page .next,
+.page .prev {
+    font-family: "微软雅黑";
+    font-weight: bold;
+}
+.page .rows {}
