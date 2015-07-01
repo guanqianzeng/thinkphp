@@ -19,6 +19,14 @@ class AController extends Controller{
             S('DB_CONFIG_DATA', $config);
         }
         C($config);
+        //超级管理员不受ip限制
+        if(!in_array(UID, C('IS_ROOT')) && C('ADMIN_ALLOW_IP')){
+            if(!in_array(get_client_ip(),explode(',',C('ADMIN_ALLOW_IP')))){
+                session('user_auth', null);
+                session('user_auth_sign', null);
+                $this->error('IP:禁止访问', U('Public/login'));
+            }
+        }
     }
 
 
@@ -70,7 +78,7 @@ class AController extends Controller{
         if( isset($param['r']) ){
             $listRows = (int)$param['r'];
         }else{
-            $listRows = C('LIST_ROWS') > 0 ? C('LIST_ROWS') : 10;
+            $listRows = C('ADMIN_LIST_ROWS') > 0 ? C('ADMIN_LIST_ROWS') : 10;
         }
         $page = new \Think\Page($total, $listRows, $param);
         if($total>$listRows){

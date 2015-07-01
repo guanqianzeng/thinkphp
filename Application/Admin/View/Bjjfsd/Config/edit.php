@@ -34,7 +34,7 @@
         <td class="ms">
             <select class="select" name="type">
                 <volist name="Think.config.CONFIG_TYPE_LIST" id="type">
-                    <option value="{$key}">{$type}</option>
+                    <option value="{$key}" <eq name="key" value="$info['type']">selected="selected"</eq>>{$type}</option>
                 </volist>
             </select>
             （系统会根据不同类型解析配置值）
@@ -46,7 +46,7 @@
             <select class="select" name="group">
                 <option value="0">不分组</option>
                 <volist name="Think.config.CONFIG_GROUP_LIST" id="group">
-                    <option value="{$key}">{$group}</option>
+                    <option value="{$key}" <eq name="key" value="$info['group']">selected="selected"</eq>>{$group}</option>
                 </volist>
             </select>
             （配置分组 用于批量设置 不分组则不会显示在系统设置中）

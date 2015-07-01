@@ -4,7 +4,7 @@
     }
     .select {width:400px;}
     .text1{height:100px;}
-	.head-a{margin: 10px 0px 20px 20px;}
+	.head-a{margin: 10px 0px 20px 20px; border-bottom: 3px solid #343843; line-height: 32px;}
 	.head-a a {
 	    background-color: #08A3BB;
 	    padding: 10px 20px;
