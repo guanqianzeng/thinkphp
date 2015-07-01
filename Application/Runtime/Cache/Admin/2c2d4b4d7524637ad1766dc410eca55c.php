@@ -26,7 +26,8 @@
         	<ul class="ul">
             	<li><a href="<?php echo U('Config/index');?>">信息管理</a>
                 	<ul class="ul1">
-                    	<li class="xz"><a href="<?php echo U('Config/index');?>">基本信息</a></li>
+                    	<li class="xz"><a href="<?php echo U('Config/group');?>">基本信息</a></li>
+                    	<li class="xz"><a href="<?php echo U('Config/index');?>">配置管理</a></li>
                         <li><a href="02.html">幻灯管理</a></li>
                         <li><a href="#">客户列表</a></li>
                         <li><a href="03.html">客户图片</a></li>
@@ -90,6 +91,7 @@
     .select {width:400px;}
     .text1{height:100px;}
 </style>
+
 <form action="" method="post">
 <table width="900" border="0" cellspacing="0" cellpadding="0" class="table">
     <tr>

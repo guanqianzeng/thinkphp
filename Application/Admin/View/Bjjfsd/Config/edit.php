@@ -5,6 +5,7 @@
     .select {width:400px;}
     .text1{height:100px;}
 </style>
+
 <form action="" method="post">
 <table width="900" border="0" cellspacing="0" cellpadding="0" class="table">
     <tr>

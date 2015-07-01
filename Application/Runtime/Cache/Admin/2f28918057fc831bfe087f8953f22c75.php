@@ -84,49 +84,46 @@
             	<div class="mrbot1">
                 	<div class="mrbt1">基本信息</div>
                     <div class="mrnr1">
-                    	<form>
-	<div class="hdtop">
-    	<a href="<?php echo U('add');?>" class="tja">添 加</a>
-        <div class="clear"></div>
-    </div>
-    <div class="hdbot">
-    <style media="screen">
-        .head910 td {
-            background-color:#08a3bb;
-            line-height: 33px;
-            color: #fff;
-            font-size: 14px;
-        }
-    </style>
-    <table width="910" border="0" cellspacing="1" cellpadding="0" class="table1 tab">
-        <tr class="head910">
-            <td align="center"><input type="checkbox" class="allcheck"></td>
-            <td align="center">名称</td>
-            <td align="center">标题</td>
-            <td align="center">分组</td>
-            <td align="center">类型</td>
-            <td align="center">操作</td>
-        </tr>
-        <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?><tr>
-                <td align="center"><input type="checkbox"></td>
-                <td align="center"><?php echo ($v['name']); ?></td>
-                <td align="center"><?php echo ($v['title']); ?></td>
-                <td align="center"><?php echo (get_config_group($v['group'])); ?></td>
-                <td align="center"><?php echo (get_config_type($v['type'])); ?></td>
-                <td align="center">
-                    <a href="<?php echo U('edit?id='. $v['id']);?>" class="xga">修改</a>|
-                    <a href="javascript:if(confirm('确认要执行该操作吗?')){location.href='<?php echo U('del?id='. $v['id']);?>'}" class="xga">删除</a>
-                </td>
-            </tr><?php endforeach; endif; else: echo "" ;endif; ?>
-    </table>
-    <div class="tableb">
-    	<input type="checkbox" class="allcheck">
-        <input type="submit" value="删除" class="scanniu cr">
-		<div class="tablebnr page">
-        	<?php echo ($_page); ?>
-        </div>
-    </div>
+                    	<style media="screen">
+    .ms select {
+        padding:0px 10px;height:24px;border:solid 1px #d2d2d2;margin-right:10px; background:#fafafa
+    }
+    .select {width:400px;}
+    .text1{height:100px;}
+	.head-a{margin: 10px 0px 20px 20px;}
+	.head-a a {
+	    background-color: #08A3BB;
+	    padding: 10px 20px;
+	    color: #FFF;
+	    font-weight: bold;
+	}
+	.head-a .act {background-color: #343843;}
+</style>
+<div class="head-a">
+	<?php if(is_array(C("CONFIG_GROUP_LIST"))): $i = 0; $__LIST__ = C("CONFIG_GROUP_LIST");if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$group): $mod = ($i % 2 );++$i;?><a <?php if(($id) == $key): ?>class="act"<?php endif; ?> href="<?php echo U('?id='.$key);?>"><?php echo ($group); ?>配置</a><?php endforeach; endif; else: echo "" ;endif; ?>
 </div>
+<form action="<?php echo U('save');?>" method="post" class="form-horizontal">
+<table width="900" border="0" cellspacing="0" cellpadding="0" class="table">
+<?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$config): $mod = ($i % 2 );++$i;?><tr>
+		<td class="td1" align="right"><?php echo ($config['title']); ?>：</td>
+		<td class="ms">
+		<?php switch($config["type"]): case "0": ?><input type="text" class="inputt input" name="config[<?php echo ($config['name']); ?>]" value="<?php echo ($config['value']); ?>"><?php break;?>
+			<?php case "1": ?><input type="text" class="inputt input" name="config[<?php echo ($config['name']); ?>]" value="<?php echo ($config['value']); ?>"><?php break;?>
+			<?php case "2": ?><textarea class="text1" name="config[<?php echo ($config['name']); ?>]"><?php echo ($config['value']); ?></textarea><?php break;?>
+			<?php case "3": ?><textarea class="text1" name="config[<?php echo ($config['name']); ?>]"><?php echo ($config['value']); ?></textarea><?php break;?>
+			<?php case "4": ?><select class="select" name="config[<?php echo ($config['name']); ?>]">
+				<?php $_result=parse_config_attr($config['extra']);if(is_array($_result)): $i = 0; $__LIST__ = $_result;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($key); ?>" <?php if(($config["value"]) == $key): ?>selected<?php endif; ?>><?php echo ($vo); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+			</select><?php break; endswitch;?>
+	(<?php echo ($config['remark']); ?>)<?php endforeach; endif; else: echo "" ;endif; ?>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<input type="submit" class="tjanniu cr" value="提 交" />
+			<input type="reset" class="czanniu cr" value="重 置" />
+		</td>
+	</tr>
+</table>
 </form>
 
                     </div>
