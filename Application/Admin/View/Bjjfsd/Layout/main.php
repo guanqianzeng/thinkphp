@@ -28,6 +28,7 @@
                 	<ul class="ul1">
                     	<li class="xz"><a href="{:U('Config/group')}">基本信息</a></li>
                     	<li class="xz"><a href="{:U('Config/index')}">配置管理</a></li>
+                    	<li class="xz"><a href="{:U('Menu/index')}">菜单管理</a></li>
                         <li><a href="02.html">幻灯管理</a></li>
                         <li><a href="#">客户列表</a></li>
                         <li><a href="03.html">客户图片</a></li>

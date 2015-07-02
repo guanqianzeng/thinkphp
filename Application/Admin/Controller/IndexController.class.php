@@ -5,7 +5,7 @@ class IndexController extends AController {
 
     public function index(){
 
-        
+
         $this->display();
     }
 }
