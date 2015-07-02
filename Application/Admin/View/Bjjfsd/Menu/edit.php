@@ -12,7 +12,12 @@
         <td class="td1" align="right">上级分类：</td>
         <td class="ms">
             <select class="select" name="pid">
-                <option value="0">一级栏目</option>
+                <option value="0">≡ 作为一级栏目 ≡</option>
+
+                <volist name="tree" id="val">
+                    <option value="{$val['id']}" <eq name="val['id']" value="$info['pid']">selected="selected"</eq> >{$val['title']}</option>
+                </volist>
+
             </select>
             （上级分类）
         </td>
@@ -35,8 +40,8 @@
         <td class="td1" align="right">隐藏：</td>
         <td class="ms">
             <select class="select" name="hide">
-                    <option value="1" <eq name="info['hide']" value="1">selected="selected"</eq>>显示</option>
-                    <option value="0" <eq name="info['hide']" value="0">selected="selected"</eq>>隐藏</option>
+                    <option value="0" <eq name="info['hide']" value="0">selected="selected"</eq>>显示</option>
+                    <option value="1" <eq name="info['hide']" value="1">selected="selected"</eq>>隐藏</option>
             </select>
             （栏目隐藏）
         </td>

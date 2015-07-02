@@ -134,7 +134,6 @@ class ConfigController extends AController {
 
     /**
      * 配置排序
-     * @author huajie <banhuajie@163.com>
      */
     public function sort(){
         if(IS_GET){

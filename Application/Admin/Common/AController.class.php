@@ -2,6 +2,9 @@
 namespace Admin\Common;
 use Think\Controller;
 class AController extends Controller{
+
+    protected $_menu = array();
+
     /* 初始化 */
     public function _initialize () {
         if(!defined('UID')) {
@@ -13,9 +16,9 @@ class AController extends Controller{
         }
 
         //批量添加配置
-        $config =   S('DB_CONFIG_DATA');
+        $config = S('DB_CONFIG_DATA');
         if(!$config){
-            $config =   D('config')->lists();
+            $config = D('config')->lists();
             S('DB_CONFIG_DATA', $config);
         }
         C($config);
@@ -35,6 +38,8 @@ class AController extends Controller{
         if (!in_array(UID, C('IS_ROOT')) && !$this->_checkRule($rule)) {
             $this->error('没有权限！');
         }
+
+
 
         // 其他
 

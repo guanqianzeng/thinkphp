@@ -20,7 +20,7 @@
   */
  function get_config_group($group=0){
      $list = C('CONFIG_GROUP_LIST');
-     return $group?$list[$group]:'';
+     return $group ? $list[$group] : '';
  }
 
  //枚举类型配置值 格式 a:名称1,b:名称2
@@ -37,3 +37,10 @@ function parse_config_attr($string) {
     }
     return $value;
 }
+
+/**
+ * 行为记录
+ * @param string 
+ * @return string
+ */
+function action_log(){}
