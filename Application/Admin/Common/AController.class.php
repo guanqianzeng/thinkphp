@@ -2,6 +2,7 @@
 namespace Admin\Common;
 use Think\Controller;
 class AController extends Controller{
+    static $Auth = null;
 
     protected $_menu = array();
 
@@ -14,7 +15,6 @@ class AController extends Controller{
         if(!UID ){
             $this->redirect('Public/login');
         }
-
         //批量添加配置
         $config = S('DB_CONFIG_DATA');
         if(!$config){
@@ -22,27 +22,56 @@ class AController extends Controller{
             S('DB_CONFIG_DATA', $config);
         }
         C($config);
-
+        //超级管理员
+        if (in_array(UID, C('IS_ROOT'))) {
+            define('IS_ROOT', 1);
+        } else {
+            define('IS_ROOT', 0);
+        }
         //超级管理员不受ip限制
-        if(!in_array(UID, C('IS_ROOT')) && C('ADMIN_ALLOW_IP')){
+        if(!IS_ROOT && C('ADMIN_ALLOW_IP')){
             if(!in_array(get_client_ip(),explode(',',C('ADMIN_ALLOW_IP')))){
                 session('user_auth', null);
                 session('user_auth_sign', null);
                 $this->error('IP:禁止访问', U('Public/login'));
             }
         }
-
         //检测访问权限
+        self::$Auth = new \Think\Auth();
         $rule  = strtolower(MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME);
-        //$rule  = strtolower(CONTROLLER_NAME.'/'.ACTION_NAME);
-        if (!in_array(UID, C('IS_ROOT')) && !$this->_checkRule($rule)) {
-            $this->error('没有权限！');
+        $this->assign('__ACT__', $rule);
+        // 超级权限
+        if (!IS_ROOT && !$this->_checkRule($rule)) {
+            session('user_auth', null);
+            session('user_auth_sign', null);
+            $this->error('没有权限！', U('Public/login'));
         }
+        if (IS_ROOT) {
+            $this->assign('__MENU__', D('Menu')->lists(array('status'=>1)));
+        } else {
+            $this->assign('__MENU__', $this->_getMenu());
+        }
+        // 执行类初始化方法最好不要用__construct
+        $this->_init();
+    }
 
+    public function _init() {}
 
-
-        // 其他
-
+    final private function _getMenu () {
+        $rules = self::$Auth->authListh(UID);
+        //print_r($menus);
+        $datas = $tree =  array();
+        foreach ($rules as $key => $val) {
+            $datas[$val['id']] = $val;
+        }
+        foreach ($datas as $key => $val) {
+            if(isset($datas[$val['pid']])){
+                $datas[$val['pid']]['child'][] = &$datas[$val['id']];
+            }else{
+                $tree[] = &$datas[$val['id']];
+            }
+        }
+        return $tree;
     }
 
     /**
@@ -51,15 +80,13 @@ class AController extends Controller{
      * @return boolean
      */
     final private function _checkRule($rule){
-        static $Auth = null;
-        if (!$Auth) {
-            $Auth = new \Think\Auth();
-        }
-        if(!$Auth->check($rule, UID, 1, 'url')){
+        if(!self::$Auth->check($rule, UID, 1, 'url')){
             return false;
         }
         return true;
     }
+
+
 
     /**
      * 通用分页列表数据集获取方法

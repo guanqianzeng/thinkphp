@@ -26,7 +26,7 @@ $(function(){
 
 	//这一段是遍历.ul li，让每个子li获得各自的背景图
 	$('.ul>li').each(function(i){
-		$(this).css('background','url(Public/Admin/images/xtb'+(i+1)+'.png) no-repeat 15px 12px #28323b');
+		$(this).css('background','url(/Public/Admin/images/xtb'+(i+1)+'.png) no-repeat 15px 12px #28323b');
 		})
 	//这里是点击展开
 	$('.ul>li>a').click(function(){

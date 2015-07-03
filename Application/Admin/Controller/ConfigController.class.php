@@ -3,9 +3,13 @@
 namespace Admin\Controller;
 use Admin\Common\AController;
 class ConfigController extends AController {
-    /**
-     * 配置管理
-     */
+
+    public function _init () {
+        $this->assign('__ACT__', strtolower(MODULE_NAME.'/'.CONTROLLER_NAME.'/index'));
+        $this->meta_head = '<a href="'.U('Config/group').'">系统管理</a>';
+    }
+
+    /* 配置管理 */
     public function index(){
         /* 查询条件初始化 */
         $map = array();
@@ -23,13 +27,11 @@ class ConfigController extends AController {
         $this->assign('group',C('CONFIG_GROUP_LIST'));
         $this->assign('group_id',I('get.group',0));
         $this->assign('list', $list);
-        $this->meta_title = '配置管理';
+        $this->meta_title = '配置列表';
         $this->display();
     }
 
-    /**
-     * 新增配置
-     */
+    /*  新增配置 */
     public function add(){
         if(IS_POST){
             $Config = D('Config');
@@ -37,6 +39,7 @@ class ConfigController extends AController {
             if($data){
                 if($Config->add()){
                     S('DB_CONFIG_DATA',null);
+                    action_log();
                     $this->success('新增成功', U('index'));
                 } else {
                     $this->error('新增失败');
@@ -51,9 +54,7 @@ class ConfigController extends AController {
         }
     }
 
-    /**
-     * 编辑配置
-     */
+    /* 编辑配置 */
     public function edit($id = 0){
         if(IS_POST){
             $Config = D('Config');
@@ -61,8 +62,7 @@ class ConfigController extends AController {
             if($data){
                 if($Config->save()){
                     S('DB_CONFIG_DATA',null);
-                    //记录行为
-                    //action_log('update_config','config',$data['id'],UID);
+                    action_log();
                     $this->success('更新成功', Cookie('__forward__'));
                 } else {
                     $this->error('更新失败');
@@ -83,9 +83,7 @@ class ConfigController extends AController {
         }
     }
 
-    /**
-     * 批量保存配置
-     */
+    /* 批量保存配置 */
     public function save($config){
         if($config && is_array($config)){
             $Config = M('Config');
@@ -95,12 +93,11 @@ class ConfigController extends AController {
             }
         }
         S('DB_CONFIG_DATA',null);
+        action_log();
         $this->success('保存成功！');
     }
 
-    /**
-     * 删除配置
-     */
+    /* 删除配置 */
     public function del(){
         $id = array_unique((array)I('id',0));
 
@@ -111,15 +108,14 @@ class ConfigController extends AController {
         $map = array('id' => array('in', $id) );
         if(M('Config')->where($map)->delete()){
             S('DB_CONFIG_DATA',null);
-            //记录行为
-            //action_log('update_config','config',$id,UID);
+            action_log();
             $this->success('删除成功');
         } else {
             $this->error('删除失败！');
         }
     }
 
-    // 获取某个标签的配置参数
+    /* 获取某个标签的配置参数 */
     public function group() {
         $id     =   I('get.id',1);
         $type   =   C('CONFIG_GROUP_LIST');
@@ -128,17 +124,15 @@ class ConfigController extends AController {
             $this->assign('list',$list);
         }
         $this->assign('id',$id);
-        $this->meta_title = $type[$id].'设置';
+        $this->meta_title = '配置信息';
+        $this->assign('__ACT__', strtolower(MODULE_NAME.'/'.CONTROLLER_NAME.'/group'));
         $this->display();
     }
 
-    /**
-     * 配置排序
-     */
+    /* 配置排序 */
     public function sort(){
         if(IS_GET){
             $ids = I('get.ids');
-
             //获取排序的数据
             $map = array('status'=>array('gt',-1));
             if(!empty($ids)){
@@ -158,6 +152,7 @@ class ConfigController extends AController {
                 $res = M('Config')->where(array('id'=>$value))->setField('sort', $key+1);
             }
             if($res !== false){
+                action_log();
                 $this->success('排序成功！',Cookie('__forward__'));
             }else{
                 $this->error('排序失败！');

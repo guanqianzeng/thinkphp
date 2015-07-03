@@ -11,7 +11,8 @@ class MenuModel extends Model {
     /* 自动验证 */
     protected $_validate = array(
         array('title','require','规则名称必填！'),
-        array('name','','规则标识符已经存在！', self::VALUE_VALIDATE, 'unique', self::MODEL_INSERT)
+        array('name','require','规则标识必填！'),
+        //array('name','','规则标识符已经存在！', self::VALUE_VALIDATE, 'unique', self::MODEL_INSERT)
     );
 
     /* 自动完成 */
@@ -25,8 +26,6 @@ class MenuModel extends Model {
             return false;
         } else {
             $this->add();
-            // 更新相关缓存
-            S('DB_MENU_DATA', null);
             return true;
         }
     }
@@ -37,8 +36,6 @@ class MenuModel extends Model {
             return false;
         } else {
             $this->save();
-            // 更新相关缓存
-            S('DB_MENU_DATA', null);
             return true;
         }
     }
@@ -69,10 +66,10 @@ class MenuModel extends Model {
     /* 格式化操作操作 */
     private function _formatTree ($lists = array(), $level = 0 , $ext = '└') {
         if (!$lists) {
-            $lists = S('DB_MENU_DATA');
+            $lists = S('DB_MENU_FORMAT');
             if (!$lists) {
                 $lists = $this->lists();
-                S('DB_MENU_DATA', $lists);
+                S('DB_MENU_FORMAT', $lists);
             }
         }
         $str = str_repeat('&nbsp', $level * 4);
@@ -88,8 +85,6 @@ class MenuModel extends Model {
             }
         }
     }
-
-
 
 
 }

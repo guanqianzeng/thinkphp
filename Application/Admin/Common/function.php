@@ -40,7 +40,10 @@ function parse_config_attr($string) {
 
 /**
  * 行为记录
- * @param string 
+ * @param string
  * @return string
  */
-function action_log(){}
+function action_log(){
+    $log  = UID . ':' . strtolower(CONTROLLER_NAME.'/'.ACTION_NAME) . PHP_EOL;
+    file_put_contents('./log.txt', $log, FILE_APPEND);
+}
