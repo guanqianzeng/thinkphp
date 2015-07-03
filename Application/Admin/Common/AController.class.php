@@ -31,9 +31,9 @@ class AController extends Controller{
         //超级管理员不受ip限制
         if(!IS_ROOT && C('ADMIN_ALLOW_IP')){
             if(!in_array(get_client_ip(),explode(',',C('ADMIN_ALLOW_IP')))){
-                session('user_auth', null);
-                session('user_auth_sign', null);
-                $this->error('IP:禁止访问', U('Public/login'));
+                //session('user_auth', null);
+                //session('user_auth_sign', null);
+                $this->error('IP:禁止访问', U('Index/index'));
             }
         }
         //检测访问权限
