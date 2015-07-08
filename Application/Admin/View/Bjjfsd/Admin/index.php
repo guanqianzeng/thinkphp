@@ -1,38 +1,41 @@
 <form>
-    <table width="900" border="0" cellspacing="0" cellpadding="0" class="table">
-      <tr>
-        <td width="90" class="td1" align="right">网站标题：</td>
-        <td><input type="text" class="inputt input" /></td>
-      </tr>
-      <tr>
-        <td class="td1" align="right">关键字：</td>
-        <td>
-        	<textarea class="text1"></textarea>
-        </td>
-      </tr>
-      <tr>
-        <td class="td1" align="right">网站描述：</td>
-        <td><textarea class="text1"></textarea></td>
-      </tr>
-      <tr>
-        <td class="td1" align="right">QQ列表：</td>
-        <td class="ms"><input type="text" class="inputt input" />QQ号之间用","隔开</td>
-      </tr>
-      <tr>
-        <td class="td1" align="right">QQ名称列表：</td>
-        <td class="ms"><input type="text" class="inputt input" />QQ名称之间用","隔开</td>
-      </tr>
-      <tr>
-        <td class="td1" align="right">开关QQ：</td>
-        <td class="radio"><input type="radio" name="qq" /><span>关</span><input type="radio" name="qq" /><span>开</span></td>
-      </tr>
-      <tr>
-        <td class="td1" align="right">网站底部信息：</td>
-        <td><img src="images/bianjiqi.png" width="793" height="302" /></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td align="center"><input type="submit" class="tjanniu cr" value="提 交" /><input type="reset" class="czanniu cr" value="重 置" /></td>
-      </tr>
+	<div class="hdtop">
+    	<a href="{:U('add')}" class="tja">添 加</a>
+        <div class="clear"></div>
+    </div>
+    <div class="hdbot">
+    <style media="screen">
+        .head910 td {
+            background-color:#08a3bb;
+            line-height: 33px;
+            color: #fff;
+            font-size: 14px;
+        }
+    </style>
+    <table width="910" border="0" cellspacing="1" cellpadding="0" class="table1 tab">
+        <tr class="head910">
+            <td align="center">ID</td>
+            <td align="center">用户名</td>
+            <td align="center">管理组</td>
+            <td align="center">上次登录时间</td>
+            <td align="center">状态</td>
+            <td align="center">操作</td>
+        </tr>
+        <volist name="list" id="v">
+            <tr>
+                <td align="center">{$v['user_id']}</td>
+                <td align="center">{$v['username']}</td>
+                <td align="center">{$group_list[$v['group_id']]['title']}</td>
+                <td align="center">{:date('Y/m/d H:i:s', $v['last_login_time'])}</td>
+                <td align="center">
+				{$v['status']?'正常':'禁用'}
+				</td>
+                <td align="center">
+                    <a href="{:U('edit?user_id='. $v['user_id'])}" class="xga">修改</a>|
+                    <a href="javascript:if(confirm('确认要执行该操作吗?')){location.href='{:U('del?user_id='. $v['user_id'])}'}" class="xga">删除</a>
+                </td>
+            </tr>
+        </volist>
     </table>
+</div>
 </form>

@@ -12,23 +12,24 @@ class AuthController extends AController {
         $this->display('Index/index');
     }
 
+    /* 列表 */
     public function index(){
-
-        $list = D('AuthGroup')->select();
-
-        //print_r($list);
+        $list = D('AuthGroup')->lists();
         $this->assign('list', $list);
         $this->meta_title = '管理组';
-        $this->display("index");
+        $this->display();
 
     }
 
+    /* 新增 */
     public function add() {
         if (IS_POST) {
             $db = D('AuthGroup');
             if (!$db->input()) {
                 $this->error($db->getError());
             } else {
+                action_log();
+                $this->updateCache();
                 $this->success('新增成功');
             }
         } else {
@@ -37,12 +38,15 @@ class AuthController extends AController {
         }
     }
 
+    /* 修改 */
     public function edit() {
         if (IS_POST) {
             $db = D('AuthGroup');
             if (!$db->update()) {
                 $this->error($db->getError());
             } else {
+                action_log();
+                $this->updateCache();
                 $this->success('更新成功');
             }
         } else {
@@ -54,10 +58,11 @@ class AuthController extends AController {
                 $this->assign('info', $info);
             }
             $this->meta_title = '更新管理组';
-            $this->display("edit");
+            $this->display();
         }
     }
 
+    /* 权限分配 */
     public function access($id = 0) {
         if (empty($id)) {
             $this->error('管理组不能为空！');
@@ -70,6 +75,8 @@ class AuthController extends AController {
             );
             $result = D('AuthGroup')->save($data);
             if ($result) {
+                action_log();
+                $this->updateCache();
                 $this->success('成功');
             } else {
                 $this->error('失败');
@@ -93,9 +100,15 @@ class AuthController extends AController {
         $map = array('id' => array('in', $id) );
         if(D('AuthGroup')->where($map)->delete()){
             action_log();
+            $this->updateCache();
             $this->success('删除成功');
         } else {
             $this->error('删除失败！');
         }
+    }
+
+    public function updateCache() {
+
+        S('DB_AUTHGROUP_DATA', null);
     }
 }
