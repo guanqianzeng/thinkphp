@@ -31,7 +31,7 @@ class CategoryController extends AController {
             } else {
                 action_log();
                 $this->updateCache();
-                $this->success('新增成功');
+                $this->success('新增成功', U('index'));
             }
         } else {
             $this->assign('info', array('pid'=>I('pid')));
@@ -50,7 +50,7 @@ class CategoryController extends AController {
             } else {
                 action_log();
                 $this->updateCache();
-                $this->success('更新成功');
+                $this->success('更新成功', U('index'));
             }
         } else {
             $id = I('id',0,'intval');
@@ -60,6 +60,9 @@ class CategoryController extends AController {
             } else {
                 $this->assign('info', $info);
             }
+            $count = D($info['type'])->where(array('catid'=>$info['id']))->count();
+            $this->assign('count', $count);
+            $this->assign('list', $this->db->formatTree());
             $this->assign('cateType', C('CATEGORY_TYPE'));
             $this->meta_title = '更新栏目';
             $this->display();

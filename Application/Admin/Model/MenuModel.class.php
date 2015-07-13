@@ -40,9 +40,18 @@ class MenuModel extends Model {
         }
     }
 
+    public function getAll($map = array(), $order = '', $field = true) {
+        $cates = $this->where($map)->field($field)->order($order)->select();
+        $datas = $tree =  array();
+        foreach ($cates as $key => $val) {
+            $datas[$val['id']] = $val;
+        }
+        return $datas;
+    }
+
     /* 获取栏目tree操作 */
     public function lists ($map = array()) {
-        $rules = $this->where($map)->field('id,pid,name,title,hide,status')->select();
+        $rules = $this->getAll($map, 'sort desc, id asc');
         $datas = $tree =  array();
         foreach ($rules as $key => $val) {
             $datas[$val['id']] = $val;

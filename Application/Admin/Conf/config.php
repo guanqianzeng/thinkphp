@@ -9,7 +9,10 @@ return array(
 
     // 模版配置
     'TMPL_PARSE_STRING'  =>array(
-         '__PUBLIC__' => '/Public/Admin/', // 更改默认的/Public 替换规则
-         '__UPLOAD__' => '/Uploads/Admin/', // 增加新的上传路径替换规则
+         '__COMMON__' => __ROOT__ . '/Public/Common/',
+         '__ADMIN__' => __ROOT__ . '/Public/' . MODULE_NAME . '/'
     ),
+
+
+
 );

@@ -47,18 +47,19 @@
     <tr>
         <td class="td1" align="right">栏目类型：</td>
         <td class="ms">
-            <select class="select" name="type">
+            <select class="select" name="type" <if condition="$count">disabled="disabled"</if>>
                 <volist name="cateType" id="v">
                     <option value="{$key}" <eq name="info['type']" value="$key">selected="selected"</eq>>{$v}</option>
                 </volist>
             </select>
-            （栏目类型）
+            （栏目类型<if condition="$count">---<font color="red">删除该分类下的信息</font></if>）
         </td>
     </tr>
     <tr>
         <td class="td1" align="right">上级栏目：</td>
         <td class="ms">
             <select class="select" name="pid">
+                <option value="0">≡ 作为一级栏目 ≡</option>
                 <volist name="list" id="v">
                     <option value="{$v['id']}" <eq name="info['pid']" value="$v['id']">selected="selected"</eq>>{$v['title']}</option>
                 </volist>

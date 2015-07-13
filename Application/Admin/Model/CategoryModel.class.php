@@ -23,6 +23,7 @@ class CategoryModel extends Model {
         if (!$this->create()) {
             return false;
         } else {
+
             $this->add();
             return true;
         }
@@ -38,13 +39,18 @@ class CategoryModel extends Model {
         }
     }
 
-    /* 获取栏目tree操作 */
-    public function lists ($map = array()) {
-        $cates = $this->where($map)->field(true)->select();
+    public function getAll($map = array(), $order = '', $field = true) {
+        $cates = $this->where($map)->field($field)->order($order)->select();
         $datas = $tree =  array();
         foreach ($cates as $key => $val) {
             $datas[$val['id']] = $val;
         }
+        return $datas;
+    }
+
+    /* 获取栏目tree操作 */
+    public function lists ($map = array()) {
+        $datas = $this->getAll($map, 'sort asc, id asc');
         foreach ($datas as $key => $val) {
             if(isset($datas[$val['pid']])){
                 $datas[$val['pid']]['child'][] = &$datas[$val['id']];
@@ -54,6 +60,8 @@ class CategoryModel extends Model {
         }
         return $tree;
     }
+
+
 
     /* 获取格式化后的栏目tree操作 */
     public function formatTree () {

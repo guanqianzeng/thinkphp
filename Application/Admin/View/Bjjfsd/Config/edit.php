@@ -26,7 +26,7 @@
         <td class="td1" align="right">排序：</td>
         <td class="ms">
             <input type="text" name="sort" value="{$info['sort']|default=0}" class="inputt input" />
-            用于分组显示的顺序）
+            排序）
         </td>
     </tr>
     <tr>

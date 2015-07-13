@@ -6,11 +6,24 @@ class ConfigController extends AController {
 
     public function _init () {
         $this->assign('__ACT__', strtolower(MODULE_NAME.'/'.CONTROLLER_NAME.'/index'));
-        $this->meta_head = '<a href="'.U('Config/group').'">系统管理</a>';
+        $this->meta_head = '<a href="'.U('Config/index').'">系统管理</a>';
+    }
+
+    /* 配置参数 */
+    public function index() {
+        $id     =   I('get.id',1);
+        $type   =   C('CONFIG_GROUP_LIST');
+        $list   =   M("Config")->where(array('status'=>1,'group'=>$id))->field('id,name,title,extra,value,remark,type')->order('sort')->select();
+        if($list) {
+            $this->assign('list',$list);
+        }
+        $this->assign('id',$id);
+        $this->meta_title = '配置信息';
+        $this->display();
     }
 
     /* 配置管理 */
-    public function index(){
+    public function group(){
         /* 查询条件初始化 */
         $map = array();
         $map  = array('status' => 1);
@@ -40,7 +53,7 @@ class ConfigController extends AController {
                 if($Config->add()){
                     S('DB_CONFIG_DATA',null);
                     action_log();
-                    $this->success('新增成功', U('index'));
+                    $this->success('新增成功', U('group'));
                 } else {
                     $this->error('新增失败');
                 }
@@ -63,7 +76,7 @@ class ConfigController extends AController {
                 if($Config->save()){
                     S('DB_CONFIG_DATA',null);
                     action_log();
-                    $this->success('更新成功', Cookie('__forward__'));
+                    $this->success('更新成功', U('group'));
                 } else {
                     $this->error('更新失败');
                 }
@@ -115,19 +128,7 @@ class ConfigController extends AController {
         }
     }
 
-    /* 获取某个标签的配置参数 */
-    public function group() {
-        $id     =   I('get.id',1);
-        $type   =   C('CONFIG_GROUP_LIST');
-        $list   =   M("Config")->where(array('status'=>1,'group'=>$id))->field('id,name,title,extra,value,remark,type')->order('sort')->select();
-        if($list) {
-            $this->assign('list',$list);
-        }
-        $this->assign('id',$id);
-        $this->meta_title = '配置信息';
-        $this->assign('__ACT__', strtolower(MODULE_NAME.'/'.CONTROLLER_NAME.'/group'));
-        $this->display();
-    }
+
 
     /* 配置排序 */
     public function sort(){

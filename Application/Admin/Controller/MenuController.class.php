@@ -22,7 +22,7 @@ class MenuController extends AController {
             if ($result->input()) {
                 action_log();
                 $this->updateCache();
-                $this->success('新增成功');
+                $this->success('新增成功', U('index'));
             } else {
                 $this->error($result->getError());
             }
@@ -42,7 +42,7 @@ class MenuController extends AController {
             if ($result->update()) {
                 action_log();
                 $this->updateCache();
-                $this->success('更新成功');
+                $this->success('更新成功', U('index'));
             } else {
                 $this->error($result->getError());
             }

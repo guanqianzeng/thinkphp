@@ -47,6 +47,13 @@
         </td>
     </tr>
     <tr>
+        <td class="td1" align="right">排序：</td>
+        <td class="ms">
+            <input type="text" name="sort" value="{$info['sort']|default=0}" class="inputt input" />
+            （排序sort desc, id desc）
+        </td>
+    </tr>
+    <tr>
         <td colspan="2" align="center">
              <input type="hidden" name="id" value="{$info['id']|default=''}">
              <input type="submit" class="tjanniu cr" value="提 交" /><input type="reset" class="czanniu cr" value="重 置" />

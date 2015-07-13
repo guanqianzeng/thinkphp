@@ -23,6 +23,36 @@
      return $group ? $list[$group] : '';
  }
 
+ /**
+  * 获取数据类型的分组
+  * @param string $group 类型
+  * @return string
+  */
+ function get_category_type($type=''){
+     $list = C('CATEGORY_TYPE');
+     return $type ? $list[$type] : '';
+ }
+
+ /**
+  * 获取新闻图片尺寸
+  * @param string $field 属性
+  * @return string
+  */
+ function get_news_px($field = ''){
+     $list = C('NEWS_IMAGE_PX');
+     return $field ? $list[$field] : '';
+ }
+
+ /**
+  * 获取产品图片尺寸
+  * @param string $field 属性
+  * @return string
+  */
+ function get_product_px($field = ''){
+     $list = C('PRODUCT_IMAGE_PX');
+     return $field ? $list[$field] : '';
+ }
+
  //枚举类型配置值 格式 a:名称1,b:名称2
 function parse_config_attr($string) {
     $array = preg_split('/[,;\r\n]+/', trim($string, ",;\r\n"));

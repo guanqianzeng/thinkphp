@@ -17,15 +17,17 @@
             <td align="center">规则名称</td>
             <td align="center">规则标识</td>
             <td align="center">隐藏</td>
+            <td align="center">排序</td>
             <td align="center">操作</td>
         </tr>
         <volist name="list" id="v">
             <tr>
-                <td align="center">{$v['title']}</td>
+                <td align="left">{$v['title']}</td>
                 <td align="center">{$v['name']}</td>
                 <td align="center">
 				{$v['hide']?'隐藏':'显示'}
 				</td>
+				<td align="center">{$v['sort']}</td>
                 <td align="center">
                     <a href="{:U('add?pid='. $v['id'])}" class="xga">添加子菜单</a>|
                     <a href="{:U('edit?id='. $v['id'])}" class="xga">修改</a>|

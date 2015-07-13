@@ -1,9 +1,10 @@
 @charset "utf-8";
 * { padding: 0;margin: 0;}
+html{ overflow-y:scroll;}
 address,caption,cite,code,dfn,em,th,var{font-weight:normal;font-style:normal;}
 h1,h2,h3,h4,h5,h6{font-weight:normal;}
 .clear{height: 0;line-height: 0;font-size: 0;clear: both;zoom: 1;overflow: hidden;visibility: hidden;width: 100%;display: block}
-body { margin:0 auto; padding:0;font-size:12px;font-family:"宋体";}
+body { margin:0 auto; padding:0;font-size:12px;font-family:"宋体"; height:100%;}
 img { border:0px;margin:0px;padding:0px}
 a{ text-decoration:none; font-size:12px;}
 a {blr:expression(this.onFocus=this.blur())}
@@ -43,7 +44,7 @@ a:focus{outline:0;}
 .mrbot1{border:solid 1px #d3d3d3;border-top:solid 3px #08a3bb; background:#ffffff}
 .mrbt1{height:36px;line-height:36px;border-bottom:solid 1px #d3d3d3;padding-left:20px;color:#1d2027; font-family:"微软雅黑"; font-size:16px;}
 .copyRight{height:48px;border-top:solid 1px #08a3bb;padding:0px 20px;line-height:48px;color:#737373;overflow:hidden}
-.mrnr1{padding:20px 20px;overflow:hidden;min-height: 600px;}
+.mrnr1{padding:20px 20px;overflow:hidden; min-height: 600px;}
 
 
 .tjanniu{height:42px; text-align:center; background:url(../images/tjbj.png) repeat-x;width:127px;border:0px;color:#fff; font-family:"微软雅黑"; font-size:20px; letter-spacing:5px;margin:10px 10px 0px;}

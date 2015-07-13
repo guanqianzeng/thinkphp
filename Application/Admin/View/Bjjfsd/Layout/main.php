@@ -4,10 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>{:C('WEB_SITE_TITLE')}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="__PUBLIC__css/style.css" rel="stylesheet" type="text/css" />
-<link href="__PUBLIC__css/tablestyle.css" rel="stylesheet" type="text/css" />
-<script language="javascript" src="__PUBLIC__js/jquery-1.4.2.min.js"></script>
-<script language="javascript" src="__PUBLIC__js/js.js"></script>
+<link href="__ADMIN__css/style.css" rel="stylesheet" type="text/css" />
+<link href="__ADMIN__css/tablestyle.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="__ADMIN__js/jquery-1.4.2.min.js"></script>
+<script language="javascript" src="__ADMIN__js/js.js"></script>
 
 </head>
 <body>
@@ -15,10 +15,10 @@
 	<div class="head">
     	<div class="head1">{:C('WEB_SITE_TITLE')}</div>
         <div class="head2">
-        	<a href="{:U('Index/index')}" class="xz"><img src="__PUBLIC__images/ttb1.png" width="24" height="23" />网站首页</a>
-            <a href="{:U('Index/index')}"><img src="__PUBLIC__images/ttb2.png" width="24" height="23" />系统管理</a>
-            <a href="{:U('Index/help')}"><img src="__PUBLIC__images/ttb3.png" width="24" height="23" />帮助中心</a>
-            <a href="{:U('Public/logout')}"><img src="__PUBLIC__images/ttb4.png" width="24" height="23" />安全退出</a>
+        	<a href="{:U('Index/index')}" class="xz"><img src="__ADMIN__images/ttb1.png" width="24" height="23" />网站首页</a>
+            <a href="{:U('Index/index')}"><img src="__ADMIN__images/ttb2.png" width="24" height="23" />系统管理</a>
+            <a href="{:U('Index/help')}"><img src="__ADMIN__images/ttb3.png" width="24" height="23" />帮助中心</a>
+            <a href="{:U('Public/logout')}"><img src="__ADMIN__images/ttb4.png" width="24" height="23" />安全退出</a>
         </div>
     </div>
     <div class="main">
