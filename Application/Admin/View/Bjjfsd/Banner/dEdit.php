@@ -9,14 +9,14 @@
 <form action="" method="post">
 <table width="900" border="0" cellspacing="0" cellpadding="0" class="table">
     <tr>
-        <td class="td1" align="right">所属栏目：</td>
+        <td class="td1" align="right">广告位：</td>
         <td class="ms">
-            <select class="select" name="catid">
-                <volist name="cate_list" id="v">
-                    <option value="{$v['id']}" <neq name="v['type']" value="$type">disabled="disabled"</neq> <eq name="v['id']" value="$info['catid']">selected="selected"</eq>>{$v['title']}</option>
+            <select class="select" name="bid">
+                <volist name="banner_lists" id="v">
+                    <option value="{$v['id']}" <eq name="v['id']" value="$info['bid']">selected="selected"</eq>>{$v['name']}</option>
                 </volist>
             </select>
-            （所属栏目）
+            （广告位）
         </td>
     </tr>
     <tr>
@@ -29,8 +29,15 @@
     <tr>
         <td align="right">图片：</td>
         <td class="upload-row">
-            <input type="text" name="thumb" value="{$info['thumb']|default=''}" readonly="readonly" class="inputt input3">
+            <input type="text" name="image" value="{$info['image']|default=''}" readonly="readonly" class="inputt input3">
             <input type="button" class="button1 cr" value="上 传">建议图片尺寸：{:get_news_px('width')}*{:get_news_px('height')}px;
+        </td>
+    </tr>
+    <tr>
+        <td class="td1" align="right">超链接：</td>
+        <td class="ms">
+            <input type="text" name="url" value="{$info['url']|default=''}" class="inputt input" />
+            （超链接 ）
         </td>
     </tr>
     <tr>
@@ -38,12 +45,6 @@
         <td class="ms">
             <textarea class="text1" name="description">{$info['description']|default=''}</textarea>
             （描述）
-        </td>
-    </tr>
-    <tr>
-        <td class="td1" align="right">内容：</td>
-        <td class="ms">
-            <script id="container" name="content" type="text/plain">{$info['content']|default=''|html_entity_decode}</script>
         </td>
     </tr>
     <tr>
@@ -76,19 +77,5 @@
         }
         // 绑定
         Tool.uploadSend();
-    })
-</script>
-
-<!-- 百度编辑器 -->
-<js href="__COMMON__js/jquery-2.0.2.js" />
-<js href="__COMMON__ueditor/ueditor.config.js" />
-<js href="__COMMON__ueditor/ueditor.all.min.js" />
-<script>
-    $(function(){
-        var ue = UE.getEditor('container',{
-            serverUrl :'{:U('Admin/Tool/ueditor')}',
-            initialFrameWidth : 800,
-            initialFrameHeight : 450
-        });
     })
 </script>

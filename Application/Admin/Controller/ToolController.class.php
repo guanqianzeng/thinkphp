@@ -17,6 +17,7 @@ class ToolController extends AController {
         $this->display();
     }
 
+    /* 图片上传 */
     public function uploadImage($id = 0){
         if (IS_POST) {
             $upload = new \Think\Upload();// 实例化上传类
@@ -56,4 +57,10 @@ class ToolController extends AController {
         C('SHOW_PAGE_TRACE', false);
 		echo $data->output();
     }
+
+    public function deleteCache() {
+        delete_dir(RUNTIME_PATH);
+        $this->success('更新成功');
+    }
+
 }

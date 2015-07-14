@@ -15,8 +15,9 @@
 	<div class="head">
     	<div class="head1">{:C('WEB_SITE_TITLE')}</div>
         <div class="head2">
-        	<a href="{:U('Index/index')}" class="xz"><img src="__ADMIN__images/ttb1.png" width="24" height="23" />网站首页</a>
-            <a href="{:U('Index/index')}"><img src="__ADMIN__images/ttb2.png" width="24" height="23" />系统管理</a>
+        	<a href="{:U('Tool/deleteCache')}" ><img src="__ADMIN__images/ttb1.png" width="24" height="23" />更新缓存</a>
+            <a href="{:U('Config/index')}"><img src="__ADMIN__images/ttb2.png" width="24" height="23" />系统管理</a>
+            <a href="{:U('Category/index')}"><img src="__ADMIN__images/ttb2.png" width="24" height="23" />内容管理</a>
             <a href="{:U('Index/help')}"><img src="__ADMIN__images/ttb3.png" width="24" height="23" />帮助中心</a>
             <a href="{:U('Public/logout')}"><img src="__ADMIN__images/ttb4.png" width="24" height="23" />安全退出</a>
         </div>
@@ -47,7 +48,7 @@
                 	您当前的位置： <a href="./admin.php">首页</a> &gt; {$meta_head} &gt; {$meta_title}
                 </div>
                 <div class="mrtr">
-                	管理员：xxx
+                	管理员：{:get_username()}
                 </div>
                 <div class="clear"></div>
             </div>

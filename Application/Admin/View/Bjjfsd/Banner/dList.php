@@ -1,4 +1,8 @@
-
+	<div class="hdtop">
+    	<a href="{:U('index')}" class="tja">返回列表</a>
+    	<a href="{:U('dAdd?bid='. $bid)}" class="tja">添 加</a>
+        <div class="clear"></div>
+    </div>
     <div class="hdbot">
     <style media="screen">
         .head910 td {
@@ -10,24 +14,27 @@
     </style>
     <table width="910" border="0" cellspacing="1" cellpadding="0" class="table1 tab">
         <tr class="head910">
-            <td align="center">ID</td>
-            <td align="center">栏目标题</td>
+            <td align="center"><input type="checkbox" class="allcheck">ID</td>
+            <td align="center">广告位名称</td>
+            <td align="center">广告图片</td>
             <td align="center">排序</td>
             <td align="center">操作</td>
         </tr>
         <volist name="list" id="v">
             <tr>
-                <td align="center">{$v['id']}</td>
+                <td align="center"><input type="checkbox" name="id" value="{$v['id']}">{$v['id']}</td>
                 <td align="center">{$v['title']}</td>
+                <td align="center"><img src="{:image($v['image'])}" width="100" /></td>
                 <td align="center">{$v['sort']}</td>
                 <td align="center">
-                    <a href="{:U('edit?catid='. $v['id'])}" class="xga">修改</a>
+                    <a href="{:U('dEdit?id='. $v['id'])}" class="xga">修改</a>|
+                    <a href="javascript:if(confirm('确认要执行该操作吗?')){location.href='{:U('dDel?id='. $v['id'])}'}" class="xga">删除</a>
                 </td>
             </tr>
         </volist>
     </table>
 	<style media="screen">
-		.special {
+		.position {
 			margin-top: 12px;
 			height: 25px;
 			background-color: #FF9A1A;
@@ -36,6 +43,8 @@
 		}
 	</style>
     <div class="tableb">
+    	<input type="checkbox" class="allcheck">
+        <input type="button" id="del" value="删除" class="scanniu cr">
 		<div class="tablebnr page">
         	{$_page}
         </div>
@@ -56,7 +65,7 @@
 					return false;
 				}
 				$.ajax({
-					url: '{:U('del')}',
+					url: '{:U('dDel')}',
 					type: 'post',
 					data: {id: ids},
 					dataType: 'json',
@@ -74,5 +83,6 @@
 				});
 			}
 		});
+
 	})
 </script>

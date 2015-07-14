@@ -1,4 +1,7 @@
-
+	<div class="hdtop">
+    	<a href="{:U('add')}" class="tja">添 加</a>
+        <div class="clear"></div>
+    </div>
     <div class="hdbot">
     <style media="screen">
         .head910 td {
@@ -10,24 +13,28 @@
     </style>
     <table width="910" border="0" cellspacing="1" cellpadding="0" class="table1 tab">
         <tr class="head910">
-            <td align="center">ID</td>
-            <td align="center">栏目标题</td>
+            <td align="center"><input type="checkbox" class="allcheck">ID</td>
+            <td align="center">广告位名称</td>
+            <td align="center">广告位类型</td>
             <td align="center">排序</td>
             <td align="center">操作</td>
         </tr>
         <volist name="list" id="v">
             <tr>
-                <td align="center">{$v['id']}</td>
-                <td align="center">{$v['title']}</td>
+                <td align="center"><input type="checkbox" name="id" value="{$v['id']}">{$v['id']}</td>
+                <td align="center">{$v['name']}</td>
+                <td align="center">{$v['type']|get_banner_type}</td>
                 <td align="center">{$v['sort']}</td>
                 <td align="center">
-                    <a href="{:U('edit?catid='. $v['id'])}" class="xga">修改</a>
+                    <a href="{:U('dList?bid='. $v['id'])}" class="xga">列表信息</a>|
+                    <a href="{:U('edit?id='. $v['id'])}" class="xga">修改</a>|
+                    <a href="javascript:if(confirm('确认要执行该操作吗?')){location.href='{:U('del?id='. $v['id'])}'}" class="xga">删除</a>
                 </td>
             </tr>
         </volist>
     </table>
 	<style media="screen">
-		.special {
+		.position {
 			margin-top: 12px;
 			height: 25px;
 			background-color: #FF9A1A;
@@ -36,6 +43,8 @@
 		}
 	</style>
     <div class="tableb">
+    	<input type="checkbox" class="allcheck">
+        <input type="button" id="del" value="删除" class="scanniu cr">
 		<div class="tablebnr page">
         	{$_page}
         </div>
@@ -74,5 +83,6 @@
 				});
 			}
 		});
+
 	})
 </script>

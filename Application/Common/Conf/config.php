@@ -16,7 +16,6 @@ return array(
     'DATA_CACHE_COMPRESS' => true,
     'DATA_CACHE_PREFIX' => 'jfsd_',
     'DATA_CACHE_TYPE' => 'File',
-    'DATA_CACHE_PATH' => '',
 
 
     'DEFAULT_THEME' => 'default',

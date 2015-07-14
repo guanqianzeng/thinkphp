@@ -4,6 +4,27 @@
  */
 
  /**
+  * 通用图片获取方法
+  * @param  string $img 图片
+  * @param  string $width 截图宽
+  * @param  string $height 截图高
+  * @return string
+  * @author 拥抱 <572300808@qq.com>
+  */
+function image($img = '', $widht = 0, $height = 0) {
+    if (!empty($img)) {
+        $file =  'Uploads/' . $img;
+        if (file_exists($file)) {
+            return __ROOT__ .'/' . $file;
+        } else {
+            return __ROOT__ .'/Uploads/default.jpg';
+        }
+    } else {
+        return __ROOT__ .'/Uploads/default.jpg';
+    }
+}
+
+ /**
   * 系统用户MD5+sha1+key加密方法
   * @param  string $str 要加密的字符串
   * @param  string $key 加密key
@@ -114,37 +135,6 @@
          }
      }
      return base64_decode($str);
- }
-
- /**
-  * 检测用户是否登录
-  * @return integer 0-未登录，大于0-当前登录用户ID
-  * @author 拥抱 <572300808@qq.com>
-  */
- function is_login(){
-     $user = session('user_auth');
-     if (empty($user)) {
-         return 0;
-     } else {
-         return session('user_auth_sign') == data_auth_sign($user) ? $user['uid'] : 0;
-     }
- }
-
- /**
-  * 数据签名认证
-  * @param  array  $data 被认证的数据
-  * @return string       签名
-  * @author 拥抱 <572300808@qq.com>
-  */
- function data_auth_sign($data) {
-     //数据类型检测
-     if(!is_array($data)){
-         $data = (array)$data;
-     }
-     ksort($data); //排序
-     $code = http_build_query($data); //url编码并生成query字符串
-     $sign = sha1($code); //生成签名
-     return $sign;
  }
 
  /**
