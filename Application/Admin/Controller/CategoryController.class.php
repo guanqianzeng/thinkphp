@@ -58,9 +58,12 @@ class CategoryController extends AController {
             if (!$info) {
                 $this->error('不存在！');
             } else {
+                $info['setting'] = unserialize($info['setting']);
                 $this->assign('info', $info);
             }
-            $count = D($info['type'])->where(array('catid'=>$info['id']))->count();
+            if ($info['type'] != 'Pages') {
+                $count = D($info['type'])->where(array('catid'=>$info['id']))->count();
+            }
             $this->assign('count', $count);
             $this->assign('list', $this->db->formatTree());
             $this->assign('cateType', C('CATEGORY_TYPE'));
@@ -87,5 +90,7 @@ class CategoryController extends AController {
     /* 更新缓存 */
     protected function updateCache() {
         S('DB_CATE_FORMAT', null);
+        S('CATEGORYS', null);
+        S('NAVS', null);
     }
 }

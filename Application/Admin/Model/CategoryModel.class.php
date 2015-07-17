@@ -16,7 +16,22 @@ class CategoryModel extends Model {
 
     /* 自动完成 */
     protected $_auto = array(
+        array('setting', 'callbackSetting', 3, 'callback')
     );
+
+    public function callbackSetting($data) {
+        if(empty($data)){
+            return '';
+        } else {
+            // $data = array_filter($data);
+            // if (empty($data)) {
+            //     return '';
+            // } else {
+            //     return serialize($data);
+            // }
+            return serialize($data);
+        }
+    }
 
     /* 插入操作 */
     public function input () {
@@ -39,6 +54,7 @@ class CategoryModel extends Model {
         }
     }
 
+    /* 获取所有栏目 */
     public function getAll($map = array(), $order = '', $field = true) {
         $cates = $this->where($map)->field($field)->order($order)->select();
         $datas = $tree =  array();
@@ -61,8 +77,6 @@ class CategoryModel extends Model {
         return $tree;
     }
 
-
-
     /* 获取格式化后的栏目tree操作 */
     public function formatTree () {
         $this->_formatTree();
@@ -83,10 +97,12 @@ class CategoryModel extends Model {
             $val['title'] = $str . $ext . $val['title'];
             if(array_key_exists('child', $val)){
                 $child = $val['child'];
+                $val['cat'] = 1;
                 unset($val['child']);
                 array_push($this->_formatTree, $val);
                 $this->_formatTree($child, $level+1);
             } else {
+                $val['cat'] = 0;
                 array_push($this->_formatTree, $val);
             }
         }

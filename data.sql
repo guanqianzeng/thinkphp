@@ -252,3 +252,16 @@ CREATE TABLE IF NOT EXISTS `jfsd_product` (
   PRIMARY KEY (`id`),
   KEY `catid` (`catid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='产品数据表';
+
+
+create table if not exists `jfsd_link` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键自增',
+    `title` varchar(100) NOT NULL DEFAULT '' COMMENT '标题',
+    `url` varchar(100) NOT NULL DEFAULT '' COMMENT 'URL',
+    `thumb` varchar(100) NOT NULL DEFAULT '' COMMENT '图片',
+    `sort` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
+    `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+    `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+    `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态',
+    PRIMARY KEY (`id`)
+) engine=innodb charset=utf8 comment '友情链接';

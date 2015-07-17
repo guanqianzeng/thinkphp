@@ -23,8 +23,9 @@ class PagesController extends AController {
         $map = array();
         $map['status'] = 1;
         $map['type'] = $this->type;
-        $list = $this->lists('category', $map, 'sort desc, id desc');
-        $this->assign('list', $list);
+        //$list = $this->lists('category', $map, 'sort desc, id desc');
+        //$this->assign('list', $list);
+        $this->assign('list', D('category')->formatTree());
         $this->assign('category', D('category')->getAll());
         $this->meta_title = '单页列表';
         $this->display();

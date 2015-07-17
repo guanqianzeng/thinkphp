@@ -13,8 +13,13 @@
         <td class="td1" align="right">所属栏目：</td>
         <td class="ms">
             <select class="select" name="catid">
+                <option value="">≡ 选择栏目 ≡</option>
                 <volist name="cate_list" id="v">
-                    <option value="{$v['id']}" <neq name="v['type']" value="$type">disabled="disabled"</neq> <eq name="v['id']" value="$info['catid']">selected="selected"</eq>>{$v['title']}</option>
+                    <if condition="$v['type'] != $type || $v['cat']">
+                        <option value="{$v['id']}" disabled="disabled" <eq name="v['id']" value="$info['catid']">selected="selected"</eq>>{$v['title']}</option>
+                    <else />
+                        <option value="{$v['id']}" <eq name="v['id']" value="$info['catid']">selected="selected"</eq>>{$v['title']}</option>
+                    </if>
                 </volist>
             </select>
             （所属栏目）

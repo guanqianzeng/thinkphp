@@ -4,9 +4,8 @@ use Think\Model;
 class ProductModel extends Model {
     /* 自动验证 */
     protected $_validate = array(
-        array('title','require','栏目名称必填！'),
         array('catid','require','所属栏目必选！'),
-        array('type','require','栏目类型必填！')
+        array('title','require','标题必填！'),
     );
 
     /* 自动完成 */
@@ -29,6 +28,7 @@ class ProductModel extends Model {
             }
         }
     }
+
     /* 插入操作 */
     public function input () {
         if (!$this->create()) {

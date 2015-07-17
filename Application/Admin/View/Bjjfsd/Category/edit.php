@@ -45,6 +45,13 @@
         </td>
     </tr>
     <tr>
+        <td class="td1" align="right">英文名称：</td>
+        <td class="ms">
+            <input type="text" name="english" value="{$info['english']|default=''}" class="inputt input" />
+            （英文名称）
+        </td>
+    </tr>
+    <tr>
         <td class="td1" align="right">栏目类型：</td>
         <td class="ms">
             <select class="select" name="type" <if condition="$count">disabled="disabled"</if>>
@@ -68,10 +75,10 @@
         </td>
     </tr>
     <tr>
-        <td class="td1" align="right">栏目图片：</td>
-        <td class="ms">
-            <input type="text" name="image" value="{$info['image']|default=''}" class="inputt input" />
-            （栏目图片）
+        <td align="right">栏目图片：</td>
+        <td class="upload-row">
+            <input type="text" name="image" value="{$info['image']|default=''}" readonly="readonly" class="inputt input3">
+            <input type="button" class="button1 cr" value="上 传">建议图片尺寸：{:get_news_px('width')}*{:get_news_px('height')}px;
         </td>
     </tr>
     <tr>
@@ -101,39 +108,40 @@
 </table>
 <table width="900" border="0" cellspacing="0" cellpadding="0" class="table">
     <tr>
-        <td class="td1" align="right">可用风格：</td>
+        <td class="td1" align="right">栏目分页数：</td>
         <td class="ms">
-            <select class="select" name="setting[style][theme]">
-                <option>等待完善...</option>
-            </select>
-            （可用风格）
+            <input type="text" name="setting[page_num]" value="{$info['setting']['page_num']|default=''}" class="inputt input" />
+            （栏目分页数）
         </td>
     </tr>
     <tr>
-        <td class="td1" align="right">栏目首页模板：</td>
+        <td class="td1" align="right">列表页模板：</td>
         <td class="ms">
-            <select class="select" name="setting[style][category]">
+            <input type="text" name="setting[list_template]" value="{$info['setting']['list_template']|default=''}" class="inputt input" />
+            <!-- <select class="select" name="setting[list_template]">
                 <option>等待完善...</option>
-            </select>
-            （栏目首页模板）
-        </td>
-    </tr>
-    <tr>
-        <td class="td1" align="right">栏目列表页模板：</td>
-        <td class="ms">
-            <select class="select" name="setting[style][list]">
-                <option>等待完善...</option>
-            </select>
-            （栏目列表页模板）
+            </select> -->
+            （列表页模板-目前先手工书写吧）
         </td>
     </tr>
     <tr>
         <td class="td1" align="right">内容页模板：</td>
         <td class="ms">
-            <select class="select" name="setting[style][show]">
+            <input type="text" name="setting[show_template]" value="{$info['setting']['show_template']|default=''}" class="inputt input" />
+            <!-- <select class="select" name="setting[show_template]">
                 <option>等待完善...</option>
-            </select>
-            （内容页模板）
+            </select> -->
+            （内容页模板-目前先手工书写吧）
+        </td>
+    </tr>
+    <tr>
+        <td class="td1" align="right">单页模板：</td>
+        <td class="ms">
+            <input type="text" name="setting[page_template]" value="{$info['setting']['page_template']|default=''}" class="inputt input" />
+            <!-- <select class="select" name="setting[page_template]">
+                <option>等待完善...</option>
+            </select> -->
+            （单页页模板-目前先手工书写吧）
         </td>
     </tr>
 </table>
@@ -141,21 +149,21 @@
     <tr>
         <td class="td1" align="right">META Title：</td>
         <td class="ms">
-            <input type="text" name="setting[seo][title]" value="{$info['setting']['seo']['title']|default=''}" class="inputt input" />
+            <input type="text" name="setting[meta_title]" value="{$info['setting'][meta_title]|default=''}" class="inputt input" />
             （栏目标题针对搜索引擎设置的标题）
         </td>
     </tr>
     <tr>
         <td class="td1" align="right">META Keywords：</td>
         <td class="ms">
-            <textarea class="text1" name="setting[seo][keywords]">{$info['setting']['seo']['description']|default=''}</textarea>
+            <textarea class="text1" name="setting[meta_keywords]">{$info['setting'][meta_keywords]|default=''}</textarea>
             （栏目关键词关键字中间用半角逗号隔开）
         </td>
     </tr>
     <tr>
         <td class="td1" align="right">META Description：</td>
         <td class="ms">
-            <textarea class="text1" name="setting[seo][description]">{$info['setting']['seo']['description']|default=''}</textarea>
+            <textarea class="text1" name="setting[meta_description]">{$info['setting']['meta_description']|default=''}</textarea>
             （栏目描述针对搜索引擎设置的网页描述）
         </td>
     </tr>
@@ -168,3 +176,19 @@
     <input type="submit" class="tjanniu cr" value="提 交" /><input type="reset" class="czanniu cr" value="重 置" />
 </div>
 </form>
+<!-- 图片上传 -->
+<script type="text/javascript">
+    var Tool = {};
+    $(function(){
+        // 上传处理
+        Tool.uploadSend = function(){
+            $(".upload-row").each(function(i){
+                $(this).find(".button1").click(function(){
+                    window.open('{:U('Tool/uploadImage/id', '', '')}/'+ i, '文件上传', 'height=100, width=400, top='+(screen.availHeight-100)/2+', left='+(screen.availWidth-400)/2+', toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
+                })
+            })
+        }
+        // 绑定
+        Tool.uploadSend();
+    })
+</script>

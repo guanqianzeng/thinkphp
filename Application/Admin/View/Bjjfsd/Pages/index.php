@@ -10,20 +10,43 @@
     </style>
     <table width="910" border="0" cellspacing="1" cellpadding="0" class="table1 tab">
         <tr class="head910">
-            <td align="center">ID</td>
+            <td align="center">栏目ID</td>
             <td align="center">栏目标题</td>
             <td align="center">排序</td>
             <td align="center">操作</td>
         </tr>
         <volist name="list" id="v">
-            <tr>
-                <td align="center">{$v['id']}</td>
-                <td align="center">{$v['title']}</td>
-                <td align="center">{$v['sort']}</td>
-                <td align="center">
-                    <a href="{:U('edit?catid='. $v['id'])}" class="xga">修改</a>
-                </td>
-            </tr>
+            <if condition="$v['type'] == 'Pages'">
+                <empty name="v['cat']">
+                    <tr>
+                        <td align="center">{$v['id']}</td>
+                        <td align="left">{$v['title']}</td>
+                        <td align="center">{$v['sort']}</td>
+                        <td align="center">
+                            <a href="{:U('edit?catid='. $v['id'])}" class="xga">修改</a>
+                        </td>
+                    </tr>
+                <else />
+                    <tr>
+                        <td align="center">{$v['id']}</td>
+                        <td align="left">{$v['title']}</td>
+                        <td align="center">{$v['sort']}</td>
+                        <td align="center">
+                            <a href="javascript:void(0);" class="xga2">×</a>
+                        </td>
+                    </tr>
+                </empty>
+
+            <else />
+                <tr>
+                    <td align="center">{$v['id']}</td>
+                    <td align="left">{$v['title']}</td>
+                    <td align="center">{$v['sort']}</td>
+                    <td align="center">
+                        <a href="javascript:void(0);" class="xga2">×</a>
+                    </td>
+                </tr>
+            </if>
         </volist>
     </table>
 	<style media="screen">

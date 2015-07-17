@@ -1,8 +1,142 @@
 <?php
 namespace Home\Controller;
-use Think\Controller;
-class IndexController extends Controller {
-    public function index(){
-        $this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover,{color:blue;}</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p><br/>版本 V{$Think.version}</div><script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"></script><thinkad id="ad_55e75dfae343f5a1"></thinkad><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>','utf-8');
+use Home\Common\HController;
+class IndexController extends HController {
+    protected $NAVS= array();   // 一级导航
+    protected $CATEGORYS = array(); //所有栏目信息
+
+    protected $order = 'sort desc, id asc'; //统一排序
+
+    public function _init() {
+
+        /* 所有栏目信息 */
+        $this->CATEGORYS = D('Category')->getAll();
+        $this->assign('CATEGORYS', $this->CATEGORYS);
+
+        /* 一级导航 */
+        $this->NAVS = S('NAVS');
+        if (!$this->NAVS) {
+            $catid = I('catid', 0, 'intval');
+            foreach ($this->CATEGORYS as $key => $val) {
+                if ($val['pid'] == 0 && $val['display']) {
+                    $this->NAVS[$key] = $val;
+                    // 目前延伸2级
+                    if ($catid == $key || $catid == $this->CATEGORYS[$key]['pid']) {
+                        $this->NAVS[$key]['action'] = 1;
+                    } else {
+                        $this->NAVS[$key]['action'] = 0;
+                    }
+                }
+            }
+            S('NAVS', $this->NAVS);
+        }
+        $this->assign('NAVS', $this->NAVS);
     }
+
+    /* 首页 */
+    public function index(){
+
+
+        $this->display();
+    }
+
+    /* 列表 */
+    public function lists($catid = 0) {
+        if (!$catid) {
+            $this->redirect('index');
+        }
+
+        //子栏目列表
+        $child = array();
+        foreach ($this->CATEGORYS as $key => $val) {
+            if ($val['pid'] == $catid && $val['display']) {
+                $child[$key] = $val;
+            }
+        }
+        // 取第一个子catid
+        if ($child) {
+            $child_shift = array_shift($child);
+            $catid = $child_shift['id'];
+        }
+        $this->assign('catid', $catid);
+
+        //当前栏目信息
+        $CAT = $this->CATEGORYS[$catid];
+        $this->assign('CAT', $CAT);
+
+        switch ($CAT['type']) {
+            case 'News':
+            case 'Product':
+                $template = $CAT['setting']['list_template'] ? $CAT['setting']['list_template'] : 'lists';
+                $where = array();
+                $where['status'] = 1;
+                $where['catid'] = $catid;
+                if ($CAT['setting']['page_num']) {
+                    $page_num = $CAT['setting']['page_num'];
+                } else {
+                    $page_num = 0;
+                }
+                $list = $this->_lists($CAT['type'], $where, $this->order, $page_num);
+                foreach ($list as $key => $val) {
+                    $list[$key]['url'] = U('show?catid='. $catid .'&id='. $val['id']);
+                }
+                $this->assign('list', $list);
+                break;
+
+            case 'Pages':
+                $template = $CAT['setting']['page_template'] ? $CAT['setting']['page_template'] : 'pages';
+                $content = M('Pages')->where(array('catid'=>$catid))->getField('content');
+                $this->assign('content', html_entity_decode($content));
+
+                break;
+
+            default:
+                $this->redirect('index');
+                break;
+        }
+
+
+        $this->display($template);
+    }
+
+    /* 详情 */
+    public function show($catid = 0, $id = 0) {
+        if (!$catid || !$id) {
+            $this->redirect('index');
+        }
+        $this->assign('catid', $catid);
+        //当前栏目信息
+        $CAT = $this->CATEGORYS[$catid];
+        $this->assign('CAT', $CAT);
+        $info = M($CAT['type'])->find($id);
+        if (empty($info)) {
+            $this->redirect('index');
+        }
+        $info['content'] = html_entity_decode($info['content']);
+        $this->assign('info', $info);
+
+        $template = $CAT['setting']['show_template'] ? $CAT['setting']['show_template'] : 'show';
+        $this->display($template);
+    }
+
+    /* 单页 */
+    public function pages() {
+        $this->display();
+    }
+
+    /* 在线留言 */
+    public function message() {
+        if (IS_POST) {
+            $model = D('Message');
+            if ($model->input()) {
+                $this->success('留言成功');
+            } else {
+                $this->error($model->getError());
+            }
+        } else {
+            $this->display();
+        }
+    }
+
+
 }
