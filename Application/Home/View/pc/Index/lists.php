@@ -40,9 +40,7 @@
 			</volist>
 			</ul>
 
-			<div class="ejmrbt"><font>STORE DISPLAY</font>店面展示</div>
-			<a href="#" class="ak"><img src="__HOME__images/tp5.png" width="244"  height="124" /></a>
-			<a href="#" class="ak"><img src="__HOME__images/tp5.png" width="244"  height="124" /></a>
+			<include file="Public/dianmian" />
 		</div>
 		<div class="clear"></div>
 	</div>

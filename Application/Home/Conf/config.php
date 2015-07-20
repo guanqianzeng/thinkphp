@@ -27,6 +27,6 @@ return array(
     ),
 
     // 自定义标签库
-    'TAGLIB_BUILD_IN'   => 'My',
-    'TAGLIB_PRE_LOAD'   => 'My',
+    'TAGLIB_BUILD_IN'   => 'Cx,Content',
+    'TAGLIB_PRE_LOAD'   => 'Cx,Content',
 );

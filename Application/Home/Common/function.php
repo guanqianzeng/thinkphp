@@ -28,6 +28,9 @@ function thumb($img = '', $width = 0, $height = 0) {
             } else {
                 $image = new \Think\Image();
                 $image->open($file);
+                if (empty($height)) {
+                    $height = $image->height();
+                }
                 $image->thumb($width, $height,\Think\Image::IMAGE_THUMB_CENTER)->save($thumb_file);
                 return WEB_URL . $thumb_file;
             }

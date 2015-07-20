@@ -14,6 +14,10 @@
             <td>{$Think.VERSION}</td>
         </tr>
         <tr>
+            <th>CMS版本</th>
+            <td>{$Think.const.CMS_VERSION}</td>
+        </tr>
+        <tr>
             <th>运行环境</th>
             <td>{$_SERVER['SERVER_SOFTWARE']}</td>
         </tr>

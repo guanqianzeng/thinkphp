@@ -30,6 +30,13 @@
         </td>
     </tr>
     <tr>
+        <td class="td1" align="right">地址：</td>
+        <td class="ms">
+            <input type="text" name="extend[address]" value="{$info['extend']['address']|default=''}" class="inputt input" />
+            （地址）
+        </td>
+    </tr>
+    <tr>
         <td class="td1" align="right">内容：</td>
         <td class="ms">
             <textarea class="text1" name="content">{$info['content']|default=''}</textarea>

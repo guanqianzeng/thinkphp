@@ -36,6 +36,7 @@ class MessageController extends AController {
         if (!$info) {
             $this->error('不存在！');
         } else {
+            $info['extend'] = unserialize($info['extend']);
             $this->assign('info', $info);
         }
         $this->meta_title = '更新' . $this->title;

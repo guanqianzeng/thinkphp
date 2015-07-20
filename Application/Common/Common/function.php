@@ -3,6 +3,8 @@
  *    共用函数库  2015年6月29日 16:15:03
  */
 
+const CMS_VERSION    = '0.1';
+
  /**
   * 通用图片获取方法
   * @param  string $img 图片

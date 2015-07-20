@@ -3,7 +3,7 @@ namespace Admin\Model;
 use Think\Model;
 class AdminModel extends Model {
     protected $_validate = array(
-        //array('verify','check_verify','验证码错误！',1,'function',4),
+        array('verify','check_verify','验证码错误！',1,'function',4),
         array('username','require','用户名必填！'),
         array('password','require','密码必填！',2),
         array('password','require','密码必填！',2,'',4)

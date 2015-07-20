@@ -3,7 +3,7 @@ namespace Home\Model;
 use Think\Model;
 class MessageModel extends Model {
 
-    protected $fields = array('id', 'title', 'email', 'tel', 'content');
+    protected $fields = array('id', 'title', 'email', 'tel', 'content', 'create_time', 'update_time', 'status', 'extend');
 
     /* 自动验证 */
     protected $_validate = array(
@@ -15,11 +15,25 @@ class MessageModel extends Model {
 
     /* 自动完成 */
     protected $_auto = array(
-        array('create_time', 'time', 1, 'function'),
-        array('update_time', 'time', 1, 'function'),
+        array('extend', 'callbackExtend', 3, 'callback'),
+        array('create_time', NOW_TIME, 1),
+        array('update_time', NOW_TIME, 2),
         array('status', 0)
     );
 
+    public function callbackExtend($data) {
+        if(empty($data)){
+            return '';
+        } else {
+            // $data = array_filter($data);
+            // if (empty($data)) {
+            //     return '';
+            // } else {
+            //     return serialize($data);
+            // }
+            return serialize($data);
+        }
+    }
 
     public function input() {
         if(!$this->create()) {

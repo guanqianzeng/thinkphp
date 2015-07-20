@@ -31,12 +31,17 @@ class IndexController extends HController {
             S('NAVS', $this->NAVS);
         }
         $this->assign('NAVS', $this->NAVS);
+
     }
 
     /* 首页 */
     public function index(){
-
-
+        $meta_title = C('WEB_SITE_TITLE');
+        $meta_keywords = C('WEB_SITE_KEYWORD');
+        $meta_description = C('WEB_SITE_DESCRIPTION');
+        $this->assign('meta_title', $meta_title);
+        $this->assign('meta_keywords', $meta_keywords);
+        $this->assign('meta_description', $meta_description);
         $this->display();
     }
 
@@ -81,6 +86,10 @@ class IndexController extends HController {
                     $list[$key]['url'] = U('show?catid='. $catid .'&id='. $val['id']);
                 }
                 $this->assign('list', $list);
+
+                $meta_title = $CAT['setting']['meta_title'] ? $CAT['setting']['meta_title'] : $CAT['title'] . ' - ';
+                $meta_keywords = $CAT['setting']['meta_keywords'] ? $CAT['setting']['meta_keywords'] : '';
+                $meta_description = $CAT['setting']['meta_description'] ? $CAT['setting']['meta_description'] : '';
                 break;
 
             case 'Pages':
@@ -88,6 +97,9 @@ class IndexController extends HController {
                 $content = M('Pages')->where(array('catid'=>$catid))->getField('content');
                 $this->assign('content', html_entity_decode($content));
 
+                $meta_title = $CAT['setting']['meta_title'] ? $CAT['setting']['meta_title'] : $CAT['title'] . ' - ';
+                $meta_keywords = $CAT['setting']['meta_keywords'] ? $CAT['setting']['meta_keywords'] : '';
+                $meta_description = $CAT['setting']['meta_description'] ? $CAT['setting']['meta_description'] : '';
                 break;
 
             default:
@@ -95,7 +107,12 @@ class IndexController extends HController {
                 break;
         }
 
-
+        $meta_title .= C('WEB_SITE_TITLE');
+        $meta_keywords = $meta_keywords ? $meta_keywords : C('WEB_SITE_KEYWORD');
+        $meta_description = $meta_description ? $meta_description : C('WEB_SITE_DESCRIPTION');
+        $this->assign('meta_title', $meta_title);
+        $this->assign('meta_keywords', $meta_keywords);
+        $this->assign('meta_description', $meta_description);
         $this->display($template);
     }
 
@@ -116,12 +133,15 @@ class IndexController extends HController {
         $this->assign('info', $info);
 
         $template = $CAT['setting']['show_template'] ? $CAT['setting']['show_template'] : 'show';
-        $this->display($template);
-    }
 
-    /* 单页 */
-    public function pages() {
-        $this->display();
+
+        $meta_title = $info['title'] . ' - ' . C('WEB_SITE_TITLE');
+        $meta_keywords = $info['title'];
+        $meta_description = $info['description'];
+        $this->assign('meta_title', $meta_title);
+        $this->assign('meta_keywords', $meta_keywords);
+        $this->assign('meta_description', $meta_description);
+        $this->display($template);
     }
 
     /* 在线留言 */

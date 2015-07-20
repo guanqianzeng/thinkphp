@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>{:C('WEB_SITE_TITLE')}</title>
+<title>{$meta_title}</title>
+<meta name="keywords" content="{$meta_keywords}">
+<meta name="description" content="{$meta_description}">
 <link href="__HOME__css/style.css" rel="stylesheet" type="text/css" />
 <script language="javascript" src="__HOME__js/jquery-1.4.2.min.js" type="text/javascript"></script>
 <script language="javascript" src="__HOME__js/js.js" type="text/javascript"></script>
