@@ -6,7 +6,7 @@
 </head>
 <body>
 <div style="margin:30px;">
-    <form action="upload.php" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="{$id}" />
         <input type="file" name="img" id="img" />
         <input type="submit" name="submit" value="提交" />

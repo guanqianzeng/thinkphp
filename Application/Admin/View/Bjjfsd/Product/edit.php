@@ -106,7 +106,7 @@
         Tool.uploadSend = function(){
             $(".upload-row").each(function(i){
                 $(this).find(".button1").click(function(){
-                    window.open('{:U('Tool/uploadImage/id', '', '')}/'+ i, '文件上传', 'height=100, width=400, top='+(screen.availHeight-100)/2+', left='+(screen.availWidth-400)/2+', toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
+                    window.open('{:U('Tool/uploadImage', '', '')}&id='+ i, '文件上传', 'height=100, width=400, top='+(screen.availHeight-100)/2+', left='+(screen.availWidth-400)/2+', toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
                 })
             })
         }

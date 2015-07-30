@@ -36,7 +36,7 @@ class ConfigController extends AController {
         $list = $this->lists('Config', $map,'sort,id');
         // 记录当前列表页的cookie
         Cookie('__forward__',$_SERVER['REQUEST_URI']);
-
+        $this->assign('__ACT__', strtolower(MODULE_NAME.'/'.CONTROLLER_NAME.'/group'));
         $this->assign('group',C('CONFIG_GROUP_LIST'));
         $this->assign('group_id',I('get.group',0));
         $this->assign('list', $list);

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>后台登录页面</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script language="javascript" src="__PUBLIC__js/jquery-1.4.2.min.js"></script>
+        <script language="javascript" src="__ADMIN__js/jquery-1.4.2.min.js"></script>
     </head>
     <style media="screen">
         body {background-color: rebeccapurple;}

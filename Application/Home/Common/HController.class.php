@@ -34,7 +34,7 @@ class HController extends \Think\Controller {
      * @return array|false
      * 返回数据集
      */
-    protected function _lists ($model, $where = array(), $order = '', $page_num = 0){
+    protected function getAll($model, $where = array(), $order = '', $page_num = 0){
         $options    =   array();
         $param    =   (array)I('get.');
         if(is_string($model)){

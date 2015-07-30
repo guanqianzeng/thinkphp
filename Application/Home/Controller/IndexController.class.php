@@ -81,7 +81,7 @@ class IndexController extends HController {
                 } else {
                     $page_num = 0;
                 }
-                $list = $this->_lists($CAT['type'], $where, $this->order, $page_num);
+                $list = $this->getAll($CAT['type'], $where, $this->order, $page_num);
                 foreach ($list as $key => $val) {
                     $list[$key]['url'] = U('show?catid='. $catid .'&id='. $val['id']);
                 }
